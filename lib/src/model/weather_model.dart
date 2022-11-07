@@ -4,13 +4,13 @@ class WeatherModel {
     required this.current,
   });
 
-  final Location? location;
-  final WeatherDataModel? current;
+  late final LocationDataModel? location;
+  late final CurrentDataModel? current;
 
   factory WeatherModel.fromJson(Map<String, dynamic> json){
     return WeatherModel(
-      location: json["location"] == null ? null : Location.fromJson(json["location"]),
-      current: json["current"] == null ? null : WeatherDataModel.fromJson(json["current"]),
+      location: json["location"] == null ? null : LocationDataModel.fromJson(json["location"]),
+      current: json["current"] == null ? null : CurrentDataModel.fromJson(json["current"]),
     );
   }
 
@@ -21,8 +21,8 @@ class WeatherModel {
 
 }
 
-class WeatherDataModel {
-  WeatherDataModel({
+class CurrentDataModel {
+  CurrentDataModel({
     required this.lastUpdatedEpoch,
     required this.lastUpdated,
     required this.tempC,
@@ -50,7 +50,7 @@ class WeatherDataModel {
 
   final int lastUpdatedEpoch;
   final String lastUpdated;
-  final int tempC;
+  final double tempC;
   final double tempF;
   final int isDay;
   final Condition? condition;
@@ -58,7 +58,7 @@ class WeatherDataModel {
   final double windKph;
   final int windDegree;
   final String windDir;
-  final int pressureMb;
+  final double pressureMb;
   final double pressureIn;
   final double precipMm;
   final double precipIn;
@@ -66,14 +66,14 @@ class WeatherDataModel {
   final int cloud;
   final double feelslikeC;
   final double feelslikeF;
-  final int visKm;
-  final int visMiles;
-  final int uv;
+  final double visKm;
+  final double visMiles;
+  final double uv;
   final double gustMph;
   final double gustKph;
 
-  factory WeatherDataModel.fromJson(Map<String, dynamic> json){
-    return WeatherDataModel(
+  factory CurrentDataModel.fromJson(Map<String, dynamic> json){
+    return CurrentDataModel(
       lastUpdatedEpoch: json["last_updated_epoch"] ?? 0,
       lastUpdated: json["last_updated"] ?? "",
       tempC: json["temp_c"] ?? 0,
@@ -155,8 +155,8 @@ class Condition {
 
 }
 
-class Location {
-  Location({
+class LocationDataModel {
+  LocationDataModel({
     required this.name,
     required this.region,
     required this.country,
@@ -176,8 +176,8 @@ class Location {
   final int localtimeEpoch;
   final String localtime;
 
-  factory Location.fromJson(Map<String, dynamic> json){
-    return Location(
+  factory LocationDataModel.fromJson(Map<String, dynamic> json){
+    return LocationDataModel(
       name: json["name"] ?? "",
       region: json["region"] ?? "",
       country: json["country"] ?? "",

@@ -29,6 +29,18 @@ dependencies:
   # for lottie animations
   lottie: ^1.4.3
 
+  # for cached network image
+  cached_network_image: ^3.2.2
+
+  # for shared preference
+  shared_preferences: ^2.0.15
+
+  # for date filter
+  intl: ^0.17.0
+
+  # for checking internet connection
+  connectivity_plus: ^2.3.6
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

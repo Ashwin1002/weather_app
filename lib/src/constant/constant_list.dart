@@ -18,8 +18,15 @@ class AssetsList {
   static String onProgressImage = "assets/lottie_animations/onprogress.json";
 }
 
+
+/// api key
+const apiKey = "5938696b04cd4d9fa9d134050220611";
+
+///base Url
+const baseUrl = "http://api.weatherapi.com/v1";
+
 /// Primary Color
-Color primaryColor = Colors.white12;
+Color primaryColor = Colors.blue;
 
 /// default Color
 Color iconColor = Colors.grey.shade600;

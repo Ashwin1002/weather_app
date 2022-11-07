@@ -25,7 +25,7 @@ class SplashState with ChangeNotifier {
     });
   }
 
-  /// NAVIGATE FROM SPLASH TO RESPECTIVE SCREEN
+  /// NAVIGATE FROM SPLASH TO Index SCREEN
   navigateUser() async {
     navigator.pushReplacementNamed(indexPath);
     notifyListeners();
