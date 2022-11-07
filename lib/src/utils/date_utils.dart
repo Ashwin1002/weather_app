@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 ///Converting Date format to Month Day, Year e.g.(Aug 8, 2022)
-getDateFormat({required String dateData}) {
+getDateFormat({required String dateData}) async {
+  debugPrint("Date => $dateData");
   DateTime convDate = DateTime.parse(dateData);
   DateFormat date = DateFormat.yMMMd();
   String finalDate = date.format(convDate);
@@ -13,21 +14,16 @@ getDateFormat({required String dateData}) {
   return finalDate;
 }
 
-// ///Converting Hour format to Hour, Minute and AM/PM e.g.(10:00 AM)
-// getHourFormat({required String hourData}) {
-//   DateTime convDate = DateTime.parse(hourData);
-//   DateFormat date = DateFormat.yMEd().add_jms();
-//   String finalTime = date.format(convDate);
-//
-//   log("converted time => $finalTime");
-//   return finalTime;
-// }
+getTimeFormat({required String timeData}) async {
+  var newTime = timeData.split(":").first;
+  log("newTime => $newTime");
 
-getAMOrPM({required String hour}) {
-  final convTime = TimeOfDay.fromDateTime(DateTime.parse(hour));
-  TimeOfDayFormat timeFormat = TimeOfDayFormat.h_colon_mm_space_a;
-  // String finalTime = TimeOfDay.;
+  if (int.parse(newTime) >= 0 && int.parse(newTime) <= 11) {
+    log('AM');
+     return "AM";
 
-  log("converted time => $convTime");
-  return convTime;
+  } else {
+    log('PM');
+    return "PM";
+  }
 }

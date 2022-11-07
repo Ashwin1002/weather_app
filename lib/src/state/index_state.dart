@@ -54,9 +54,14 @@ class IndexState with ChangeNotifier {
 
   TextEditingController get searchController => _searchController;
 
-  String? _searchError;
+  late bool _isNotHidden = false;
 
-  String? get searchError => _searchError;
+  bool get isNotHidden => _isNotHidden;
+
+  late String _noConnection = "";
+
+  String get noConnection => _noConnection;
+
 
   set getLatitude(String value) {
     _latitude = value;
@@ -89,10 +94,21 @@ class IndexState with ChangeNotifier {
     notifyListeners();
   }
 
+  set getSwitchValue(value) {
+    _isNotHidden = value;
+    notifyListeners();
+  }
+
   init() async {
     searchController.text = await SharedPref.getSharedPreferenceData(
         key: 'Search', type: 'String', dValue: '');
     await checkConnection();
+  }
+
+  changeSwitchState() {
+    _isNotHidden = !_isNotHidden;
+    log("switch => $_isNotHidden");
+    notifyListeners();
   }
 
   getLocationPermission() async {
@@ -125,52 +141,24 @@ class IndexState with ChangeNotifier {
     return position;
   }
 
-  errorValueClear() {
-    _searchError = null;
-    notifyListeners();
-  }
-
-  bool ifValueContent() {
-    if (searchController.text.isNotEmpty) {
-      //debugPrint('Password: ${contactController.text}');
-      notifyListeners();
-      return true;
-    }
-    return false;
-  }
-
-  ifEmpty() {
-    if (searchController.text == '' || searchController.text.isEmpty) {
-      _searchError = "* Required";
-      return false;
-    } else {
-      return true;
-    }
-    notifyListeners();
-  }
-
-  onButtonPressed() async {
-    if (ifEmpty() && ifValueContent()) {
-      checkConnection();
-    }
-    notifyListeners();
-  }
 
   checkConnection() async {
     await ConnectivityCheck.check().then((value) async {
       if (value) {
         getLoading = true;
         Future.delayed(const Duration(seconds: 0), () async {
+          _noConnection = "Online";
+          _weatherDataModel = CurrentDataModel.fromJson({});
+          _locationDataModel = LocationDataModel.fromJson({});
           if (searchController.text.isEmpty) {
             await getWeatherDataFromLatLongAPI();
           } else {
-            SharedPref.setSharedPreferenceData(key: "Search", dValue: searchController.text.trim(), type: 'String');
             await getWeatherDataFromNameAPI();
           }
         });
       } else {
         getLoading = false;
-        errorValueClear();
+        _noConnection = "No internet Connection";
         log("No internet Connection");
       }
     });
@@ -198,16 +186,18 @@ class IndexState with ChangeNotifier {
   getWeatherDataFromNameAPI() async {
     try {
       WeatherModel weatherModel = await WeatherAPI.getWeatherAPIFromName(
-        name: _searchController.text.trim(),
+        name: _searchController.text.trim().isEmpty ? "" : _searchController.text.trim(),
       );
 
-      errorValueClear();
+      SharedPref.setSharedPreferenceData(key: "Search", dValue: searchController.text.trim(), type: 'String');
       _locationDataModel = weatherModel.location!;
       _weatherDataModel = weatherModel.current!;
+
       getLoading = false;
 
       log("location details => ${jsonEncode(_locationDataModel)}");
       log("current weather details => ${jsonEncode(_weatherDataModel)}");
+
     } catch (e) {
       getLoading = false;
       log("error => ${e.toString()}");
