@@ -40,13 +40,23 @@ dependencies:
 
   # for checking internet connection
   connectivity_plus: ^2.3.6
+
+  # for getting latitude and longitude
   geolocator: ^9.0.2
+
+  # app icon
+  flutter_launcher_icons: ^0.10.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^2.0.0
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/logo/app_icon.png"
 
 
 flutter:
