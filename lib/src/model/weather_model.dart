@@ -79,7 +79,7 @@ class CurrentDataModel {
       tempC: json["temp_c"] ?? 0,
       tempF: json["temp_f"] ?? 0.toDouble(),
       isDay: json["is_day"] ?? 0,
-      condition: json["condition"] == null ? null : Condition.fromJson(json["condition"]),
+      condition: json["condition"] == null ? Condition.fromJson({}) : Condition.fromJson(json["condition"]),
       windMph: json["wind_mph"] ?? 0.toDouble(),
       windKph: json["wind_kph"] ?? 0.toDouble(),
       windDegree: json["wind_degree"] ?? 0,

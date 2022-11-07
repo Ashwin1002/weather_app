@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:weather_app/src/service/route_helper/route_name.dart';
+import 'package:weather_app/src/state/index_state.dart';
 
 class SplashState with ChangeNotifier {
   SplashState();
@@ -20,6 +22,7 @@ class SplashState with ChangeNotifier {
   int get splashTime => _splashTime;
 
   void _startTimer() async {
+    await Provider.of<IndexState>(_context,listen:false).getLocationPermission();
     Future.delayed(Duration(seconds: _splashTime), () async {
       await navigateUser();
     });
