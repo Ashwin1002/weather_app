@@ -13,8 +13,9 @@ Simple Weather app is an application built with flutter which shows current weat
 
 1. Weather Forecast by Day
 2. Weather Forecast by Time
-3. Brigth / Dark Theme
-4. Air Quality Index
+3. Air Quality Index
+4. Brigth / Dark Theme
+5. Unit/Widget Testing
 
 
 # Getting Started With Flutter
