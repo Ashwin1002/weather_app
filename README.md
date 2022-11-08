@@ -17,16 +17,6 @@ Simple Weather app is an application built with flutter which shows current weat
 4. Brigth / Dark Theme
 5. Unit/Widget Testing
 
-
-# Getting Started With Flutter
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-
 # Getting Started with App
 
 1. Download Android Studio and install flutter and dart. (See docs at https://docs.flutter.dev/get-started/install?gclid=CjwKCAiA9qKbBhAzEiwAS4yeDWF4xMRxNFWMZHXVGGlOfmehkvG8tTkGludRiBzrqfyeF_a70bU7oxoCnw4QAvD_BwE&gclsrc=aw.ds)
